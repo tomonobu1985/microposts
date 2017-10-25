@@ -18,6 +18,26 @@
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                     {!! Form::close() !!}
                 @endif
+                @if (Auth::user()->is_users_favorites($micropost->id))
+                    {!! Form::open(['route' => ['users.removefavorites', $micropost->id], 'method' => 'delete']) !!}
+<!--                        {!! Form::submit('お気に入り', ['class' => "glyphicon glyphicon-star"]) !!}  -->
+                            <!-- ボタンと一緒に使う -->
+                            <button type="submit" class="btn btn-default">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+<!--                        <button type="submit"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>　　-->
+                    {!! Form::close() !!}
+                @else
+                    {!! Form::open(['route' => ['users.setfavorites', $micropost->id], 'method' => 'POST']) !!}
+<!--                    {!! Form::open(['route' => ['users.setfavorites', $user->id]]) !!}  -->
+<!--                        {!! Form::submit('お気に入り', ['class' => "glyphicon glyphicon-star-empty"]) !!}   -->
+                        <!-- ボタンと一緒に使う -->
+                        <button type="submit" class="btn btn-default">
+                          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                        </button>
+<!--                        <button type="submit"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></button>　　　-->
+                        {!! Form::close() !!}
+                @endif
             </div>
         </div>
     </li>
